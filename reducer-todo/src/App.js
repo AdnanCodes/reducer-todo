@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import TodoForm from "./components/TodoComponents/TodoForm";
 import TodoList from "./components/TodoComponents/TodoList";
 
 import "./components/TodoComponents/Todo.css";
+import { listReducer, initialState } from "./components/reducers/listReducer";
 
 const todoData = [
   {
@@ -77,7 +78,8 @@ const todoData = [
 // }
 
 function App() {
-  const [task, setTask] = useState(todoData);
+  const [task, setTask] = useState([]);
+  const [state, dispatch] = useReducer(listReducer, initialState);
 
   const addTask = taskName => {
     const newTask = {
@@ -107,13 +109,13 @@ function App() {
   const clearCompleted = () => {
     setTask(task.filter(task => !task.completed));
   };
-
+  console.log(state);
   return (
     <div>
       <h2>Welcome to your Todo App!</h2>
-      <TodoForm addTask={addTask} />
+      <TodoForm />
       <TodoList
-        todo={task}
+        todo={state}
         toggleItem={toggleItem}
         clearCompleted={clearCompleted}
       />

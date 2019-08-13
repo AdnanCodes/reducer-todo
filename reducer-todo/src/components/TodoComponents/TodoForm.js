@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
+import { listReducer, initialState } from "../reducers/listReducer";
 
 // class TodoForm extends React.Component {
 //   constructor() {
@@ -36,6 +37,7 @@ import React, { useState } from "react";
 
 const TodoForm = props => {
   const [name, setName] = useState("");
+  const [state, dispatch] = useReducer(listReducer, initialState);
 
   const handleChanges = e => {
     setName(e.target.value);
@@ -43,7 +45,8 @@ const TodoForm = props => {
 
   const submitItem = e => {
     e.preventDefault();
-    props.addTask(name);
+    // Old version via props.addTask(name);
+    dispatch({ type: "ADD_ITEM", payload: name });
     setName("");
   };
 
