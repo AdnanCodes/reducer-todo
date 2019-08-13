@@ -90,8 +90,8 @@ function App() {
   };
 
   const toggleItem = id => {
-    setTask({
-      todo: task.map(item => {
+    setTask(
+      task.map(item => {
         if (item.id === id) {
           return {
             ...item,
@@ -101,7 +101,7 @@ function App() {
           return item;
         }
       })
-    });
+    );
   };
 
   const clearCompleted = () => {
