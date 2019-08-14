@@ -81,30 +81,32 @@ function App() {
   const [task, setTask] = useState([]);
   const [state, dispatch] = useReducer(listReducer, initialState);
 
-  const addTask = taskName => {
-    const newTask = {
-      task: taskName,
-      id: Date.now(),
-      completed: false
-    };
-    setTask([...task, newTask]);
-    console.log(newTask, "New Task has been added");
-  };
+  // const addTask = taskName => {
+  //   const newTask = {
+  //     task: taskName,
+  //     id: Date.now(),
+  //     completed: false
+  //   };
+  //   setTask([...task, newTask]);
+  //   console.log(newTask, "New Task has been added");
+  // };
 
-  const toggleItem = id => {
-    setTask(
-      task.map(item => {
-        if (item.id === id) {
-          return {
-            ...item,
-            completed: !item.completed
-          };
-        } else {
-          return item;
-        }
-      })
-    );
-  };
+  // const toggleItem = id => {
+  //   setTask(
+  //     task.map(item => {
+  //       if (item.id === id) {
+  //         return {
+  //           ...item,
+  //           completed: !item.completed
+  //         };
+  //       } else {
+  //         return item;
+  //       }
+  //     })
+  //   );
+  // };
+
+  const toggleItem = id => dispatch({ type: "TOGGLE_ITEM", payload: id });
 
   const clearCompleted = () => {
     setTask(task.filter(task => !task.completed));
@@ -113,9 +115,9 @@ function App() {
   return (
     <div>
       <h2>Welcome to your Todo App!</h2>
-      <TodoForm />
+      <TodoForm dispatch={dispatch} />
       <TodoList
-        todo={state}
+        todo={state.todoData}
         toggleItem={toggleItem}
         clearCompleted={clearCompleted}
       />

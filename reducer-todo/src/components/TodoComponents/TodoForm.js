@@ -35,10 +35,9 @@ import { listReducer, initialState } from "../reducers/listReducer";
 //   }
 // }
 
-const TodoForm = props => {
+const TodoForm = ({ dispatch }) => {
   const [name, setName] = useState("");
-  const [state, dispatch] = useReducer(listReducer, initialState);
-
+  //const [state, dispatch] = useReducer(listReducer, initialState);
   const handleChanges = e => {
     setName(e.target.value);
   };
