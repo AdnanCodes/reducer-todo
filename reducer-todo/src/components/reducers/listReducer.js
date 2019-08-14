@@ -41,6 +41,11 @@ export const listReducer = (state, action) => {
           }
         })
       };
+    case "CLEAR_ITEMS":
+      return {
+        ...state,
+        todoData: state.todoData.filter(task => !task.completed)
+      };
     default:
       return state;
   }

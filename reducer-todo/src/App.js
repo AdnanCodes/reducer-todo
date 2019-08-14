@@ -108,9 +108,14 @@ function App() {
 
   const toggleItem = id => dispatch({ type: "TOGGLE_ITEM", payload: id });
 
+  // const clearCompleted = () => {
+  //   setTask(task.filter(task => !task.completed));
+  // };
+
   const clearCompleted = () => {
-    setTask(task.filter(task => !task.completed));
+    dispatch({ type: "CLEAR_ITEMS" });
   };
+
   console.log(state);
   return (
     <div>
